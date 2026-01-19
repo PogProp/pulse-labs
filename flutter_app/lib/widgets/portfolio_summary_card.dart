@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../models/portfolio_model.dart';
 import '../utils/constants.dart';
 import '../utils/formatters.dart';
+import '../screens/portfolio_holdings_screen.dart';
 
 class PortfolioSummaryCard extends StatelessWidget {
   final PortfolioSummary portfolio;
@@ -23,23 +24,33 @@ class PortfolioSummaryCard extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
       ),
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16),
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [
-              Colors.blue.shade600,
-              Colors.blue.shade800,
-            ],
+      child: InkWell(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const PortfolioHoldingsScreen(),
+            ),
+          );
+        },
+        borderRadius: BorderRadius.circular(16),
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16),
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                Colors.blue.shade600,
+                Colors.blue.shade800,
+              ],
+            ),
           ),
-        ),
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text(
@@ -129,6 +140,7 @@ class PortfolioSummaryCard extends StatelessWidget {
               ],
             ),
           ],
+        ),
         ),
       ),
     );
