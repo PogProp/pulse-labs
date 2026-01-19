@@ -1,15 +1,27 @@
-// TODO: Create data models for portfolio
-// Example structure:
-// class PortfolioHolding {
-//   final String id;
-//   final String symbol;
-//   final double quantity;
-//   final double averagePrice;
-//   final double currentPrice;
-//   final double pnl;
-//   final double pnlPercent;
-//   
-//   PortfolioHolding({...});
-//   
-//   factory PortfolioHolding.fromJson(Map<String, dynamic> json) {...}
-// }
+class PortfolioSummary {
+  final double totalValue;
+  final double totalPnl;
+  final double totalPnlPercent;
+  final int totalHoldings;
+  final String lastUpdated;
+
+  PortfolioSummary({
+    required this.totalValue,
+    required this.totalPnl,
+    required this.totalPnlPercent,
+    required this.totalHoldings,
+    required this.lastUpdated,
+  });
+
+  factory PortfolioSummary.fromJson(Map<String, dynamic> json) {
+    return PortfolioSummary(
+      totalValue: double.parse(json['totalValue'] as String),
+      totalPnl: double.parse(json['totalPnl'] as String),
+      totalPnlPercent: double.parse(json['totalPnlPercent'] as String),
+      totalHoldings: json['totalHoldings'] as int,
+      lastUpdated: json['lastUpdated'] as String,
+    );
+  }
+
+  bool get isPositivePnl => totalPnl >= 0;
+}

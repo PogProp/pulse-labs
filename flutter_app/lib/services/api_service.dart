@@ -26,4 +26,26 @@ class ApiService {
       throw Exception('Error fetching market data: $e');
     }
   }
+
+  Future<Map<String, dynamic>> getPortfolio() async {
+    try {
+      final response = await http.get(
+        Uri.parse('$baseUrl${AppConstants.portfolioEndpoint}'),
+      );
+
+      if (response.statusCode == 200) {
+        final jsonData = json.decode(response.body);
+
+        if (jsonData['success'] == true && jsonData['data'] != null) {
+          return jsonData['data'] as Map<String, dynamic>;
+        } else {
+          throw Exception('Invalid response format');
+        }
+      } else {
+        throw Exception('Failed to load portfolio: ${response.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('Error fetching portfolio: $e');
+    }
+  }
 }

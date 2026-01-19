@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/market_data_provider.dart';
+import '../providers/portfolio_provider.dart';
 import '../widgets/market_data_card.dart';
 import '../widgets/error_state.dart';
 import '../widgets/empty_state.dart';
 import '../widgets/animated_list_item.dart';
 import '../widgets/sort_bottom_sheet.dart';
+import '../widgets/portfolio_summary_card.dart';
 
 class MarketDataScreen extends StatefulWidget {
   const MarketDataScreen({super.key});
@@ -23,6 +25,7 @@ class _MarketDataScreenState extends State<MarketDataScreen> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Provider.of<MarketDataProvider>(context, listen: false).loadMarketData();
+      Provider.of<PortfolioProvider>(context, listen: false).loadPortfolioSummary();
     });
   }
 
@@ -33,8 +36,10 @@ class _MarketDataScreenState extends State<MarketDataScreen> {
   }
 
   Future<void> _handleRefresh() async {
-    await Provider.of<MarketDataProvider>(context, listen: false)
-        .refreshMarketData();
+    await Future.wait([
+      Provider.of<MarketDataProvider>(context, listen: false).refreshMarketData(),
+      Provider.of<PortfolioProvider>(context, listen: false).refreshPortfolio(),
+    ]);
   }
 
   void _onSearchChanged(String query) {
@@ -128,16 +133,34 @@ class _MarketDataScreenState extends State<MarketDataScreen> {
                     )
                   : RefreshIndicator(
                       onRefresh: _handleRefresh,
-                      child: ListView.separated(
-                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                        itemCount: filteredData.length,
-                        separatorBuilder: (context, index) =>
-                            const SizedBox(height: 12.0),
-                        itemBuilder: (context, index) {
-                          final marketData = filteredData[index];
-                          return AnimatedListItem(
-                            index: index,
-                            child: MarketDataCard(marketData: marketData),
+                      child: Consumer<PortfolioProvider>(
+                        builder: (context, portfolioProvider, child) {
+                          return ListView.builder(
+                            padding: EdgeInsets.zero,
+                            itemCount: filteredData.length + 1,
+                            itemBuilder: (context, index) {
+                              if (index == 0) {
+                                if (portfolioProvider.hasData) {
+                                  return PortfolioSummaryCard(
+                                    portfolio: portfolioProvider.summary!,
+                                  );
+                                }
+                                return const SizedBox.shrink();
+                              }
+
+                              final dataIndex = index - 1;
+                              final marketData = filteredData[dataIndex];
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 16.0,
+                                  vertical: 6.0,
+                                ),
+                                child: AnimatedListItem(
+                                  index: dataIndex,
+                                  child: MarketDataCard(marketData: marketData),
+                                ),
+                              );
+                            },
                           );
                         },
                       ),

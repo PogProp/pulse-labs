@@ -1,39 +1,39 @@
 import 'package:flutter/foundation.dart';
 import '../services/api_service.dart';
+import '../models/portfolio_model.dart';
 
 class PortfolioProvider with ChangeNotifier {
   final ApiService _apiService = ApiService();
-  
-  Map<String, dynamic>? _summary;
-  List<dynamic> _holdings = [];
+
+  PortfolioSummary? _summary;
   bool _isLoading = false;
   String? _error;
-  
-  Map<String, dynamic>? get summary => _summary;
-  List<dynamic> get holdings => _holdings;
+
+  PortfolioSummary? get summary => _summary;
   bool get isLoading => _isLoading;
   String? get error => _error;
-  
-  // TODO: Implement methods
-  // - loadPortfolioSummary()
-  // - loadHoldings()
-  // - loadPerformance(String timeframe)
-  // - addTransaction(Map<String, dynamic> transaction)
-  
+  bool get hasData => _summary != null;
+  bool get hasError => _error != null;
+
   Future<void> loadPortfolioSummary() async {
     _isLoading = true;
     _error = null;
     notifyListeners();
-    
+
     try {
-      // TODO: Implement API call
-      // final response = await _apiService.getPortfolioSummary();
-      // _summary = response['data'];
+      final data = await _apiService.getPortfolio();
+      _summary = PortfolioSummary.fromJson(data);
+      _error = null;
     } catch (e) {
       _error = e.toString();
+      _summary = null;
     } finally {
       _isLoading = false;
       notifyListeners();
     }
+  }
+
+  Future<void> refreshPortfolio() async {
+    await loadPortfolioSummary();
   }
 }
