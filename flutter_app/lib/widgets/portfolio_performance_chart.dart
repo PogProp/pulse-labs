@@ -39,7 +39,7 @@ class PortfolioPerformanceChart extends StatelessWidget {
           children: [
             _buildHeader(returnColor),
             const SizedBox(height: 20),
-            _buildTimeframeSelector(),
+            _buildTimeframeSelector(theme, isDark),
             const SizedBox(height: 20),
             _buildChart(context, theme, isDark, isPositive),
             const SizedBox(height: 16),
@@ -83,7 +83,7 @@ class PortfolioPerformanceChart extends StatelessWidget {
     );
   }
 
-  Widget _buildTimeframeSelector() {
+  Widget _buildTimeframeSelector(ThemeData theme, bool isDark) {
     final timeframes = ['7d', '30d', '90d', '1y'];
 
     return Row(
@@ -95,9 +95,12 @@ class PortfolioPerformanceChart extends StatelessWidget {
             label: Text(timeframe),
             selected: isSelected,
             onSelected: (_) => onTimeframeChanged(timeframe),
-            selectedColor: Colors.blue,
+            selectedColor: theme.colorScheme.primary,
+            backgroundColor: isDark ? Colors.grey[800] : Colors.grey[200],
             labelStyle: TextStyle(
-              color: isSelected ? Colors.white : Colors.black87,
+              color: isSelected
+                  ? Colors.white
+                  : theme.textTheme.bodyMedium?.color,
               fontSize: 12,
               fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
             ),

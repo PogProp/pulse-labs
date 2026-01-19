@@ -25,7 +25,8 @@ class _MarketDataScreenState extends State<MarketDataScreen> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Provider.of<MarketDataProvider>(context, listen: false).loadMarketData();
-      Provider.of<PortfolioProvider>(context, listen: false).loadPortfolioSummary();
+      Provider.of<PortfolioProvider>(context, listen: false)
+          .loadPortfolioSummary();
     });
   }
 
@@ -37,7 +38,8 @@ class _MarketDataScreenState extends State<MarketDataScreen> {
 
   Future<void> _handleRefresh() async {
     await Future.wait([
-      Provider.of<MarketDataProvider>(context, listen: false).refreshMarketData(),
+      Provider.of<MarketDataProvider>(context, listen: false)
+          .refreshMarketData(),
       Provider.of<PortfolioProvider>(context, listen: false).refreshPortfolio(),
     ]);
   }
@@ -87,6 +89,9 @@ class _MarketDataScreenState extends State<MarketDataScreen> {
                     child: TextField(
                       controller: _searchController,
                       onChanged: _onSearchChanged,
+                      onTapOutside: (event) {
+                        FocusScope.of(context).unfocus();
+                      },
                       decoration: InputDecoration(
                         hintText: 'Search by symbol or name...',
                         prefixIcon: const Icon(Icons.search),
@@ -103,9 +108,10 @@ class _MarketDataScreenState extends State<MarketDataScreen> {
                           borderRadius: BorderRadius.circular(12),
                         ),
                         filled: true,
-                        fillColor: Theme.of(context).brightness == Brightness.dark
-                            ? Colors.grey[850]
-                            : Colors.grey[100],
+                        fillColor:
+                            Theme.of(context).brightness == Brightness.dark
+                                ? Colors.grey[850]
+                                : Colors.grey[100],
                       ),
                     ),
                   ),
