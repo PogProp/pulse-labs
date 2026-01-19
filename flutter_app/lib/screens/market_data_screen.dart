@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../l10n/app_localizations.dart';
 import '../providers/market_data_provider.dart';
 import '../providers/portfolio_provider.dart';
 import '../widgets/market_data_card.dart';
@@ -52,6 +53,8 @@ class _MarketDataScreenState extends State<MarketDataScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return Consumer<MarketDataProvider>(
       builder: (context, provider, child) {
         if (provider.isLoading && !provider.hasData) {
@@ -93,7 +96,7 @@ class _MarketDataScreenState extends State<MarketDataScreen> {
                         FocusScope.of(context).unfocus();
                       },
                       decoration: InputDecoration(
-                        hintText: 'Search by symbol or name...',
+                        hintText: l10n.searchHint,
                         prefixIcon: const Icon(Icons.search),
                         suffixIcon: _searchQuery.isNotEmpty
                             ? IconButton(
@@ -136,8 +139,8 @@ class _MarketDataScreenState extends State<MarketDataScreen> {
             ),
             Expanded(
               child: filteredData.isEmpty
-                  ? const EmptyState(
-                      message: 'No results found',
+                  ? EmptyState(
+                      message: l10n.noResultsFound,
                     )
                   : RefreshIndicator(
                       onRefresh: _handleRefresh,

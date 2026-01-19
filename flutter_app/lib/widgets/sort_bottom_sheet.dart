@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../l10n/app_localizations.dart';
 import '../providers/market_data_provider.dart';
 
 class SortBottomSheet extends StatelessWidget {
@@ -11,6 +12,8 @@ class SortBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
@@ -20,9 +23,9 @@ class SortBottomSheet extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
-                'Sort by',
-                style: TextStyle(
+              Text(
+                l10n.sortBy,
+                style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
@@ -37,7 +40,7 @@ class SortBottomSheet extends StatelessWidget {
           ...SortOption.values.map((option) {
             final isSelected = provider.sortOption == option;
             return ListTile(
-              title: Text(provider.getSortLabel(option)),
+              title: Text(provider.getSortLabel(option, l10n)),
               trailing: isSelected
                   ? const Icon(Icons.check, color: Colors.blue)
                   : null,

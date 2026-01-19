@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
+import '../l10n/app_localizations.dart';
 import '../models/portfolio_model.dart';
 import '../utils/constants.dart';
 import '../utils/formatters.dart';
@@ -19,6 +20,7 @@ class PortfolioPerformanceChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
     final isPositive = performance.summary.isPositiveReturn;
@@ -37,26 +39,26 @@ class PortfolioPerformanceChart extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildHeader(returnColor),
+            _buildHeader(returnColor, l10n),
             const SizedBox(height: 20),
             _buildTimeframeSelector(theme, isDark),
             const SizedBox(height: 20),
-            _buildChart(context, theme, isDark, isPositive),
+            _buildChart(context, theme, isDark, isPositive, l10n),
             const SizedBox(height: 16),
-            _buildSummary(theme, isDark, returnColor),
+            _buildSummary(theme, isDark, returnColor, l10n),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildHeader(Color returnColor) {
+  Widget _buildHeader(Color returnColor, AppLocalizations l10n) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const Text(
-          'Performance',
-          style: TextStyle(
+        Text(
+          l10n.performance,
+          style: const TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
           ),
@@ -110,12 +112,12 @@ class PortfolioPerformanceChart extends StatelessWidget {
     );
   }
 
-  Widget _buildChart(BuildContext context, ThemeData theme, bool isDark, bool isPositive) {
+  Widget _buildChart(BuildContext context, ThemeData theme, bool isDark, bool isPositive, AppLocalizations l10n) {
     if (performance.data.isEmpty) {
-      return const SizedBox(
+      return SizedBox(
         height: 200,
         child: Center(
-          child: Text('No data available'),
+          child: Text(l10n.noDataAvailable),
         ),
       );
     }
@@ -249,7 +251,7 @@ class PortfolioPerformanceChart extends StatelessWidget {
     );
   }
 
-  Widget _buildSummary(ThemeData theme, bool isDark, Color returnColor) {
+  Widget _buildSummary(ThemeData theme, bool isDark, Color returnColor, AppLocalizations l10n) {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
@@ -261,7 +263,7 @@ class PortfolioPerformanceChart extends StatelessWidget {
         children: [
           _buildSummaryItem(
             theme,
-            'Start Value',
+            l10n.startValue,
             Formatters.currencyFormatter.format(performance.summary.startValue),
           ),
           Container(
@@ -271,7 +273,7 @@ class PortfolioPerformanceChart extends StatelessWidget {
           ),
           _buildSummaryItem(
             theme,
-            'End Value',
+            l10n.endValue,
             Formatters.currencyFormatter.format(performance.summary.endValue),
           ),
           Container(
@@ -281,7 +283,7 @@ class PortfolioPerformanceChart extends StatelessWidget {
           ),
           _buildSummaryItem(
             theme,
-            'Total Return',
+            l10n.totalReturn,
             '${Formatters.percentFormatter.format(performance.summary.totalReturn)}%',
             valueColor: returnColor,
           ),

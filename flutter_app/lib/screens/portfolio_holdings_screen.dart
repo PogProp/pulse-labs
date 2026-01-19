@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../l10n/app_localizations.dart';
 import '../providers/portfolio_provider.dart';
 import '../widgets/portfolio_holding_card.dart';
 import '../widgets/portfolio_performance_chart.dart';
@@ -45,9 +46,11 @@ class _PortfolioHoldingsScreenState extends State<PortfolioHoldingsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Portfolio Holdings'),
+        title: Text(l10n.portfolioHoldings),
         elevation: 0,
       ),
       body: Consumer<PortfolioProvider>(
@@ -66,8 +69,8 @@ class _PortfolioHoldingsScreenState extends State<PortfolioHoldingsScreen> {
           }
 
           if (!provider.hasHoldings) {
-            return const EmptyState(
-              message: 'No holdings found',
+            return EmptyState(
+              message: l10n.noHoldingsFound,
             );
           }
 

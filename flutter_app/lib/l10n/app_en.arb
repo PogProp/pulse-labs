@@ -1,0 +1,178 @@
+{
+  "@@locale": "en",
+
+  "appTitle": "PulseNow",
+  "@appTitle": {
+    "description": "The title of the application"
+  },
+
+  "switchToLightMode": "Switch to Light Mode",
+  "@switchToLightMode": {
+    "description": "Tooltip for switching to light theme"
+  },
+
+  "switchToDarkMode": "Switch to Dark Mode",
+  "@switchToDarkMode": {
+    "description": "Tooltip for switching to dark theme"
+  },
+
+  "searchHint": "Search by symbol or name...",
+  "@searchHint": {
+    "description": "Hint text for the search field"
+  },
+
+  "noResultsFound": "No results found",
+  "@noResultsFound": {
+    "description": "Message when search returns no results"
+  },
+
+  "about": "About",
+  "@about": {
+    "description": "Section header for about section"
+  },
+
+  "marketStatistics": "Market Statistics",
+  "@marketStatistics": {
+    "description": "Section header for market statistics"
+  },
+
+  "marketCap": "Market Cap",
+  "@marketCap": {
+    "description": "Label for market capitalization"
+  },
+
+  "volume24h": "Volume (24h)",
+  "@volume24h": {
+    "description": "Label for 24-hour trading volume"
+  },
+
+  "high24h": "24h High",
+  "@high24h": {
+    "description": "Label for 24-hour high price"
+  },
+
+  "low24h": "24h Low",
+  "@low24h": {
+    "description": "Label for 24-hour low price"
+  },
+
+  "volume": "Volume",
+  "@volume": {
+    "description": "Label for trading volume"
+  },
+
+  "portfolioHoldings": "Portfolio Holdings",
+  "@portfolioHoldings": {
+    "description": "Title for portfolio holdings screen"
+  },
+
+  "noHoldingsFound": "No holdings found",
+  "@noHoldingsFound": {
+    "description": "Message when portfolio has no holdings"
+  },
+
+  "portfolioValue": "Portfolio Value",
+  "@portfolioValue": {
+    "description": "Label for total portfolio value"
+  },
+
+  "holdings": "Holdings",
+  "@holdings": {
+    "description": "Label for number of holdings"
+  },
+
+  "totalPnl": "Total P&L",
+  "@totalPnl": {
+    "description": "Label for total profit and loss"
+  },
+
+  "currentPrice": "Current Price",
+  "@currentPrice": {
+    "description": "Label for current price"
+  },
+
+  "averagePrice": "Average Price",
+  "@averagePrice": {
+    "description": "Label for average purchase price"
+  },
+
+  "portfolioAllocation": "Portfolio Allocation",
+  "@portfolioAllocation": {
+    "description": "Label for portfolio allocation percentage"
+  },
+
+  "performance": "Performance",
+  "@performance": {
+    "description": "Chart header for performance chart"
+  },
+
+  "noDataAvailable": "No data available",
+  "@noDataAvailable": {
+    "description": "Message when no data is available for chart"
+  },
+
+  "startValue": "Start Value",
+  "@startValue": {
+    "description": "Label for starting value in performance summary"
+  },
+
+  "endValue": "End Value",
+  "@endValue": {
+    "description": "Label for ending value in performance summary"
+  },
+
+  "totalReturn": "Total Return",
+  "@totalReturn": {
+    "description": "Label for total return in performance summary"
+  },
+
+  "sortBy": "Sort by",
+  "@sortBy": {
+    "description": "Title for sort bottom sheet"
+  },
+
+  "sortSymbol": "Symbol",
+  "@sortSymbol": {
+    "description": "Sort option by symbol"
+  },
+
+  "sortPriceHighToLow": "Price: High to Low",
+  "@sortPriceHighToLow": {
+    "description": "Sort option by price descending"
+  },
+
+  "sortPriceLowToHigh": "Price: Low to High",
+  "@sortPriceLowToHigh": {
+    "description": "Sort option by price ascending"
+  },
+
+  "sortChangeHighToLow": "Change: High to Low",
+  "@sortChangeHighToLow": {
+    "description": "Sort option by change descending"
+  },
+
+  "sortChangeLowToHigh": "Change: Low to High",
+  "@sortChangeLowToHigh": {
+    "description": "Sort option by change ascending"
+  },
+
+  "errorTitle": "Oops! Something went wrong",
+  "@errorTitle": {
+    "description": "Title for error state"
+  },
+
+  "unknownError": "Unknown error occurred",
+  "@unknownError": {
+    "description": "Default error message"
+  },
+
+  "tryAgain": "Try Again",
+  "@tryAgain": {
+    "description": "Button label to retry after error"
+  },
+
+  "noMarketData": "No market data available",
+  "@noMarketData": {
+    "description": "Default empty state message for market data"
+  }
+}

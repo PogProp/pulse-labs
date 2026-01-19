@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../l10n/app_localizations.dart';
 import '../models/portfolio_model.dart';
 import '../utils/constants.dart';
 import '../utils/formatters.dart';
@@ -14,6 +15,7 @@ class PortfolioSummaryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final pnlColor = portfolio.isPositivePnl
         ? const Color(AppConstants.positiveColor)
         : const Color(AppConstants.negativeColor);
@@ -53,9 +55,9 @@ class PortfolioSummaryCard extends StatelessWidget {
               Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
-                  'Portfolio Value',
-                  style: TextStyle(
+                Text(
+                  l10n.portfolioValue,
+                  style: const TextStyle(
                     color: Colors.white70,
                     fontSize: 14,
                   ),
@@ -128,12 +130,12 @@ class PortfolioSummaryCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 _buildStat(
-                  'Holdings',
+                  l10n.holdings,
                   '${portfolio.totalHoldings}',
                   Icons.pie_chart,
                 ),
                 _buildStat(
-                  'Total P&L',
+                  l10n.totalPnl,
                   Formatters.currencyFormatter.format(portfolio.totalPnl),
                   Icons.analytics,
                 ),

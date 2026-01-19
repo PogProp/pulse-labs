@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import '../l10n/app_localizations.dart';
 import '../services/api_service.dart';
 import '../models/market_data_model.dart';
 
@@ -81,18 +82,18 @@ class MarketDataProvider with ChangeNotifier {
     return List.unmodifiable(sortedList);
   }
 
-  String getSortLabel(SortOption option) {
+  String getSortLabel(SortOption option, AppLocalizations l10n) {
     switch (option) {
       case SortOption.symbol:
-        return 'Symbol';
+        return l10n.sortSymbol;
       case SortOption.priceHighToLow:
-        return 'Price: High to Low';
+        return l10n.sortPriceHighToLow;
       case SortOption.priceLowToHigh:
-        return 'Price: Low to High';
+        return l10n.sortPriceLowToHigh;
       case SortOption.changeHighToLow:
-        return 'Change: High to Low';
+        return l10n.sortChangeHighToLow;
       case SortOption.changeLowToHigh:
-        return 'Change: Low to High';
+        return l10n.sortChangeLowToHigh;
     }
   }
 }

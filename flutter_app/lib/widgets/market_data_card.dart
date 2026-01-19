@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../l10n/app_localizations.dart';
 import '../models/market_data_model.dart';
 import '../utils/constants.dart';
 import '../utils/formatters.dart';
@@ -16,6 +17,7 @@ class MarketDataCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final changeColor = marketData.isPositiveChange
         ? const Color(AppConstants.positiveColor)
         : const Color(AppConstants.negativeColor);
@@ -44,7 +46,7 @@ class MarketDataCard extends StatelessWidget {
               const SizedBox(height: 12),
               const Divider(height: 1),
               const SizedBox(height: 12),
-              _buildMarketInfo(),
+              _buildMarketInfo(l10n),
             ],
           ),
         ),
@@ -112,18 +114,18 @@ class MarketDataCard extends StatelessWidget {
     );
   }
 
-  Widget _buildMarketInfo() {
+  Widget _buildMarketInfo(AppLocalizations l10n) {
     return Column(
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             InfoItem(
-              label: '24h High',
+              label: l10n.high24h,
               value: Formatters.currencyFormatter.format(marketData.high24h),
             ),
             InfoItem(
-              label: '24h Low',
+              label: l10n.low24h,
               value: Formatters.currencyFormatter.format(marketData.low24h),
             ),
           ],
@@ -133,11 +135,11 @@ class MarketDataCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             InfoItem(
-              label: 'Volume',
+              label: l10n.volume,
               value: formatLargeCurrency(marketData.volume),
             ),
             InfoItem(
-              label: 'Market Cap',
+              label: l10n.marketCap,
               value: formatLargeCurrency(marketData.marketCap),
             ),
           ],

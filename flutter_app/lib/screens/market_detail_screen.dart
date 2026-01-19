@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../l10n/app_localizations.dart';
 import '../models/market_data_model.dart';
 import '../utils/formatters.dart';
 import '../utils/number_formatters.dart';
@@ -15,6 +16,8 @@ class MarketDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(marketData.symbol),
@@ -27,9 +30,9 @@ class MarketDetailScreen extends StatelessWidget {
           children: [
             _buildPriceSection(),
             const SizedBox(height: 24),
-            _buildAboutSection(context),
+            _buildAboutSection(context, l10n),
             const SizedBox(height: 24),
-            _buildStatisticsSection(),
+            _buildStatisticsSection(l10n),
           ],
         ),
       ),
@@ -56,15 +59,15 @@ class MarketDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildAboutSection(BuildContext context) {
+  Widget _buildAboutSection(BuildContext context, AppLocalizations l10n) {
     final theme = Theme.of(context);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          'About',
-          style: TextStyle(
+        Text(
+          l10n.about,
+          style: const TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
@@ -82,13 +85,13 @@ class MarketDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildStatisticsSection() {
+  Widget _buildStatisticsSection(AppLocalizations l10n) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          'Market Statistics',
-          style: TextStyle(
+        Text(
+          l10n.marketStatistics,
+          style: const TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
@@ -103,11 +106,11 @@ class MarketDetailScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     InfoItem(
-                      label: 'Market Cap',
+                      label: l10n.marketCap,
                       value: formatLargeCurrency(marketData.marketCap),
                     ),
                     InfoItem(
-                      label: 'Volume (24h)',
+                      label: l10n.volume24h,
                       value: formatLargeCurrency(marketData.volume),
                     ),
                   ],
@@ -117,11 +120,11 @@ class MarketDetailScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     InfoItem(
-                      label: '24h High',
+                      label: l10n.high24h,
                       value: Formatters.currencyFormatter.format(marketData.high24h),
                     ),
                     InfoItem(
-                      label: '24h Low',
+                      label: l10n.low24h,
                       value: Formatters.currencyFormatter.format(marketData.low24h),
                     ),
                   ],

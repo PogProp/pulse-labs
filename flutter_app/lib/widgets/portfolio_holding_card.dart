@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../l10n/app_localizations.dart';
 import '../models/portfolio_model.dart';
 import '../utils/constants.dart';
 import '../utils/formatters.dart';
@@ -13,6 +14,7 @@ class PortfolioHoldingCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
     final pnlColor = holding.isPositivePnl
@@ -31,9 +33,9 @@ class PortfolioHoldingCard extends StatelessWidget {
           children: [
             _buildHeader(theme, isDark, pnlColor),
             const SizedBox(height: 16),
-            _buildMetrics(theme, isDark),
+            _buildMetrics(theme, isDark, l10n),
             const SizedBox(height: 12),
-            _buildAllocationBar(theme, isDark),
+            _buildAllocationBar(theme, isDark, l10n),
           ],
         ),
       ),
@@ -102,7 +104,7 @@ class PortfolioHoldingCard extends StatelessWidget {
     );
   }
 
-  Widget _buildMetrics(ThemeData theme, bool isDark) {
+  Widget _buildMetrics(ThemeData theme, bool isDark, AppLocalizations l10n) {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
@@ -114,21 +116,21 @@ class PortfolioHoldingCard extends StatelessWidget {
           _buildMetricRow(
             theme,
             isDark,
-            'Current Price',
+            l10n.currentPrice,
             Formatters.currencyFormatter.format(holding.currentPrice),
           ),
           const SizedBox(height: 8),
           _buildMetricRow(
             theme,
             isDark,
-            'Average Price',
+            l10n.averagePrice,
             Formatters.currencyFormatter.format(holding.averagePrice),
           ),
           const SizedBox(height: 8),
           _buildMetricRow(
             theme,
             isDark,
-            'Total P&L',
+            l10n.totalPnl,
             Formatters.currencyFormatter.format(holding.pnl),
             valueColor: holding.isPositivePnl
                 ? const Color(AppConstants.positiveColor)
@@ -164,7 +166,7 @@ class PortfolioHoldingCard extends StatelessWidget {
     );
   }
 
-  Widget _buildAllocationBar(ThemeData theme, bool isDark) {
+  Widget _buildAllocationBar(ThemeData theme, bool isDark, AppLocalizations l10n) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -172,7 +174,7 @@ class PortfolioHoldingCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'Portfolio Allocation',
+              l10n.portfolioAllocation,
               style: TextStyle(
                 fontSize: 12,
                 color:

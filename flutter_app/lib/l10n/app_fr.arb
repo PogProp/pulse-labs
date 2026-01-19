@@ -1,0 +1,178 @@
+{
+  "@@locale": "fr",
+
+  "appTitle": "PulseNow",
+  "@appTitle": {
+    "description": "Le titre de l'application"
+  },
+
+  "switchToLightMode": "Passer en mode clair",
+  "@switchToLightMode": {
+    "description": "Info-bulle pour passer au thème clair"
+  },
+
+  "switchToDarkMode": "Passer en mode sombre",
+  "@switchToDarkMode": {
+    "description": "Info-bulle pour passer au thème sombre"
+  },
+
+  "searchHint": "Rechercher par symbole ou nom...",
+  "@searchHint": {
+    "description": "Texte d'aide pour le champ de recherche"
+  },
+
+  "noResultsFound": "Aucun résultat trouvé",
+  "@noResultsFound": {
+    "description": "Message quand la recherche ne retourne aucun résultat"
+  },
+
+  "about": "À propos",
+  "@about": {
+    "description": "En-tête de section pour la section à propos"
+  },
+
+  "marketStatistics": "Statistiques du marché",
+  "@marketStatistics": {
+    "description": "En-tête de section pour les statistiques du marché"
+  },
+
+  "marketCap": "Capitalisation",
+  "@marketCap": {
+    "description": "Libellé pour la capitalisation boursière"
+  },
+
+  "volume24h": "Volume (24h)",
+  "@volume24h": {
+    "description": "Libellé pour le volume de trading sur 24 heures"
+  },
+
+  "high24h": "Plus haut 24h",
+  "@high24h": {
+    "description": "Libellé pour le prix le plus haut sur 24 heures"
+  },
+
+  "low24h": "Plus bas 24h",
+  "@low24h": {
+    "description": "Libellé pour le prix le plus bas sur 24 heures"
+  },
+
+  "volume": "Volume",
+  "@volume": {
+    "description": "Libellé pour le volume de trading"
+  },
+
+  "portfolioHoldings": "Avoirs du portefeuille",
+  "@portfolioHoldings": {
+    "description": "Titre pour l'écran des avoirs du portefeuille"
+  },
+
+  "noHoldingsFound": "Aucun avoir trouvé",
+  "@noHoldingsFound": {
+    "description": "Message quand le portefeuille n'a aucun avoir"
+  },
+
+  "portfolioValue": "Valeur du portefeuille",
+  "@portfolioValue": {
+    "description": "Libellé pour la valeur totale du portefeuille"
+  },
+
+  "holdings": "Avoirs",
+  "@holdings": {
+    "description": "Libellé pour le nombre d'avoirs"
+  },
+
+  "totalPnl": "P&P Total",
+  "@totalPnl": {
+    "description": "Libellé pour les profits et pertes totaux"
+  },
+
+  "currentPrice": "Prix actuel",
+  "@currentPrice": {
+    "description": "Libellé pour le prix actuel"
+  },
+
+  "averagePrice": "Prix moyen",
+  "@averagePrice": {
+    "description": "Libellé pour le prix d'achat moyen"
+  },
+
+  "portfolioAllocation": "Allocation du portefeuille",
+  "@portfolioAllocation": {
+    "description": "Libellé pour le pourcentage d'allocation du portefeuille"
+  },
+
+  "performance": "Performance",
+  "@performance": {
+    "description": "En-tête du graphique de performance"
+  },
+
+  "noDataAvailable": "Aucune donnée disponible",
+  "@noDataAvailable": {
+    "description": "Message quand aucune donnée n'est disponible pour le graphique"
+  },
+
+  "startValue": "Valeur initiale",
+  "@startValue": {
+    "description": "Libellé pour la valeur de départ dans le résumé de performance"
+  },
+
+  "endValue": "Valeur finale",
+  "@endValue": {
+    "description": "Libellé pour la valeur finale dans le résumé de performance"
+  },
+
+  "totalReturn": "Rendement total",
+  "@totalReturn": {
+    "description": "Libellé pour le rendement total dans le résumé de performance"
+  },
+
+  "sortBy": "Trier par",
+  "@sortBy": {
+    "description": "Titre pour le panneau de tri"
+  },
+
+  "sortSymbol": "Symbole",
+  "@sortSymbol": {
+    "description": "Option de tri par symbole"
+  },
+
+  "sortPriceHighToLow": "Prix : du plus élevé au plus bas",
+  "@sortPriceHighToLow": {
+    "description": "Option de tri par prix décroissant"
+  },
+
+  "sortPriceLowToHigh": "Prix : du plus bas au plus élevé",
+  "@sortPriceLowToHigh": {
+    "description": "Option de tri par prix croissant"
+  },
+
+  "sortChangeHighToLow": "Variation : de la plus élevée à la plus basse",
+  "@sortChangeHighToLow": {
+    "description": "Option de tri par variation décroissante"
+  },
+
+  "sortChangeLowToHigh": "Variation : de la plus basse à la plus élevée",
+  "@sortChangeLowToHigh": {
+    "description": "Option de tri par variation croissante"
+  },
+
+  "errorTitle": "Oups ! Une erreur s'est produite",
+  "@errorTitle": {
+    "description": "Titre pour l'état d'erreur"
+  },
+
+  "unknownError": "Une erreur inconnue s'est produite",
+  "@unknownError": {
+    "description": "Message d'erreur par défaut"
+  },
+
+  "tryAgain": "Réessayer",
+  "@tryAgain": {
+    "description": "Libellé du bouton pour réessayer après une erreur"
+  },
+
+  "noMarketData": "Aucune donnée de marché disponible",
+  "@noMarketData": {
+    "description": "Message d'état vide par défaut pour les données de marché"
+  }
+}
