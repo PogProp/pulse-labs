@@ -13,6 +13,8 @@ class PortfolioHoldingCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
     final pnlColor = holding.isPositivePnl
         ? const Color(AppConstants.positiveColor)
         : const Color(AppConstants.negativeColor);
@@ -27,18 +29,18 @@ class PortfolioHoldingCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildHeader(pnlColor),
+            _buildHeader(theme, isDark, pnlColor),
             const SizedBox(height: 16),
-            _buildMetrics(),
+            _buildMetrics(theme, isDark),
             const SizedBox(height: 12),
-            _buildAllocationBar(),
+            _buildAllocationBar(theme, isDark),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildHeader(Color pnlColor) {
+  Widget _buildHeader(ThemeData theme, bool isDark, Color pnlColor) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -58,7 +60,8 @@ class PortfolioHoldingCard extends StatelessWidget {
                 '${holding.quantity} units',
                 style: TextStyle(
                   fontSize: 14,
-                  color: Colors.grey[600],
+                  color:
+                      theme.textTheme.bodyMedium?.color?.withValues(alpha: 0.6),
                 ),
               ),
             ],
@@ -99,26 +102,32 @@ class PortfolioHoldingCard extends StatelessWidget {
     );
   }
 
-  Widget _buildMetrics() {
+  Widget _buildMetrics(ThemeData theme, bool isDark) {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: Colors.grey[100],
+        color: isDark ? Colors.grey[850] : Colors.grey[100],
         borderRadius: BorderRadius.circular(8),
       ),
       child: Column(
         children: [
           _buildMetricRow(
+            theme,
+            isDark,
             'Current Price',
             Formatters.currencyFormatter.format(holding.currentPrice),
           ),
           const SizedBox(height: 8),
           _buildMetricRow(
+            theme,
+            isDark,
             'Average Price',
             Formatters.currencyFormatter.format(holding.averagePrice),
           ),
           const SizedBox(height: 8),
           _buildMetricRow(
+            theme,
+            isDark,
             'Total P&L',
             Formatters.currencyFormatter.format(holding.pnl),
             valueColor: holding.isPositivePnl
@@ -130,7 +139,9 @@ class PortfolioHoldingCard extends StatelessWidget {
     );
   }
 
-  Widget _buildMetricRow(String label, String value, {Color? valueColor}) {
+  Widget _buildMetricRow(
+      ThemeData theme, bool isDark, String label, String value,
+      {Color? valueColor}) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -138,7 +149,7 @@ class PortfolioHoldingCard extends StatelessWidget {
           label,
           style: TextStyle(
             fontSize: 13,
-            color: Colors.grey[700],
+            color: isDark ? Colors.grey[400] : Colors.grey[700],
           ),
         ),
         Text(
@@ -153,7 +164,7 @@ class PortfolioHoldingCard extends StatelessWidget {
     );
   }
 
-  Widget _buildAllocationBar() {
+  Widget _buildAllocationBar(ThemeData theme, bool isDark) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -164,7 +175,8 @@ class PortfolioHoldingCard extends StatelessWidget {
               'Portfolio Allocation',
               style: TextStyle(
                 fontSize: 12,
-                color: Colors.grey[600],
+                color:
+                    theme.textTheme.bodyMedium?.color?.withValues(alpha: 0.6),
               ),
             ),
             Text(
@@ -182,8 +194,10 @@ class PortfolioHoldingCard extends StatelessWidget {
           child: LinearProgressIndicator(
             value: holding.allocation / 100,
             minHeight: 8,
-            backgroundColor: Colors.grey[300],
-            valueColor: const AlwaysStoppedAnimation<Color>(Colors.blue),
+            backgroundColor: isDark ? Colors.grey[700] : Colors.grey[300],
+            valueColor: AlwaysStoppedAnimation<Color>(
+              theme.colorScheme.primary,
+            ),
           ),
         ),
       ],

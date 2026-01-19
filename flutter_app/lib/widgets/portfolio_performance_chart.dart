@@ -19,6 +19,8 @@ class PortfolioPerformanceChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
     final isPositive = performance.summary.isPositiveReturn;
     final returnColor = isPositive
         ? const Color(AppConstants.positiveColor)
@@ -39,9 +41,9 @@ class PortfolioPerformanceChart extends StatelessWidget {
             const SizedBox(height: 20),
             _buildTimeframeSelector(),
             const SizedBox(height: 20),
-            _buildChart(context, isPositive),
+            _buildChart(context, theme, isDark, isPositive),
             const SizedBox(height: 16),
-            _buildSummary(returnColor),
+            _buildSummary(theme, isDark, returnColor),
           ],
         ),
       ),
@@ -105,7 +107,7 @@ class PortfolioPerformanceChart extends StatelessWidget {
     );
   }
 
-  Widget _buildChart(BuildContext context, bool isPositive) {
+  Widget _buildChart(BuildContext context, ThemeData theme, bool isDark, bool isPositive) {
     if (performance.data.isEmpty) {
       return const SizedBox(
         height: 200,
@@ -244,35 +246,38 @@ class PortfolioPerformanceChart extends StatelessWidget {
     );
   }
 
-  Widget _buildSummary(Color returnColor) {
+  Widget _buildSummary(ThemeData theme, bool isDark, Color returnColor) {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: Colors.grey[100],
+        color: isDark ? Colors.grey[850] : Colors.grey[100],
         borderRadius: BorderRadius.circular(8),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           _buildSummaryItem(
+            theme,
             'Start Value',
             Formatters.currencyFormatter.format(performance.summary.startValue),
           ),
           Container(
             width: 1,
             height: 30,
-            color: Colors.grey[300],
+            color: isDark ? Colors.grey[700] : Colors.grey[300],
           ),
           _buildSummaryItem(
+            theme,
             'End Value',
             Formatters.currencyFormatter.format(performance.summary.endValue),
           ),
           Container(
             width: 1,
             height: 30,
-            color: Colors.grey[300],
+            color: isDark ? Colors.grey[700] : Colors.grey[300],
           ),
           _buildSummaryItem(
+            theme,
             'Total Return',
             '${Formatters.percentFormatter.format(performance.summary.totalReturn)}%',
             valueColor: returnColor,
@@ -282,14 +287,14 @@ class PortfolioPerformanceChart extends StatelessWidget {
     );
   }
 
-  Widget _buildSummaryItem(String label, String value, {Color? valueColor}) {
+  Widget _buildSummaryItem(ThemeData theme, String label, String value, {Color? valueColor}) {
     return Column(
       children: [
         Text(
           label,
           style: TextStyle(
             fontSize: 11,
-            color: Colors.grey[600],
+            color: theme.textTheme.bodyMedium?.color?.withValues(alpha: 0.6),
           ),
         ),
         const SizedBox(height: 4),

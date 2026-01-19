@@ -103,7 +103,9 @@ class _MarketDataScreenState extends State<MarketDataScreen> {
                           borderRadius: BorderRadius.circular(12),
                         ),
                         filled: true,
-                        fillColor: Colors.grey[100],
+                        fillColor: Theme.of(context).brightness == Brightness.dark
+                            ? Colors.grey[850]
+                            : Colors.grey[100],
                       ),
                     ),
                   ),

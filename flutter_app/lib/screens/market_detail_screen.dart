@@ -27,7 +27,7 @@ class MarketDetailScreen extends StatelessWidget {
           children: [
             _buildPriceSection(),
             const SizedBox(height: 24),
-            _buildAboutSection(),
+            _buildAboutSection(context),
             const SizedBox(height: 24),
             _buildStatisticsSection(),
           ],
@@ -56,7 +56,9 @@ class MarketDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildAboutSection() {
+  Widget _buildAboutSection(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -72,7 +74,7 @@ class MarketDetailScreen extends StatelessWidget {
           marketData.description,
           style: TextStyle(
             fontSize: 16,
-            color: Colors.grey[700],
+            color: theme.textTheme.bodyMedium?.color?.withValues(alpha: 0.7),
             height: 1.6,
           ),
         ),
