@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'market_data_screen.dart';
+import '../providers/theme_provider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -10,6 +12,23 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('PulseNow'),
         elevation: 0,
+        actions: [
+          Consumer<ThemeProvider>(
+            builder: (context, themeProvider, child) {
+              return IconButton(
+                icon: Icon(
+                  themeProvider.isDarkMode
+                      ? Icons.light_mode
+                      : Icons.dark_mode,
+                ),
+                onPressed: () => themeProvider.toggleTheme(),
+                tooltip: themeProvider.isDarkMode
+                    ? 'Switch to Light Mode'
+                    : 'Switch to Dark Mode',
+              );
+            },
+          ),
+        ],
       ),
       body: const MarketDataScreen(),
     );

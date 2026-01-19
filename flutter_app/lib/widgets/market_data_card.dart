@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import '../models/market_data_model.dart';
 import '../utils/constants.dart';
+import '../utils/formatters.dart';
+import '../utils/number_formatters.dart';
+import '../screens/market_detail_screen.dart';
 import 'info_item.dart';
 
 class MarketDataCard extends StatelessWidget {
@@ -14,12 +16,6 @@ class MarketDataCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final currencyFormatter = NumberFormat.currency(
-      symbol: '\$',
-      decimalDigits: 2,
-    );
-
-    final percentFormatter = NumberFormat('+#,##0.00;-#,##0.00');
     final changeColor = marketData.isPositiveChange
         ? const Color(AppConstants.positiveColor)
         : const Color(AppConstants.negativeColor);
@@ -31,7 +27,12 @@ class MarketDataCard extends StatelessWidget {
       ),
       child: InkWell(
         onTap: () {
-          // Optional: Navigate to detail view
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => MarketDetailScreen(marketData: marketData),
+            ),
+          );
         },
         borderRadius: BorderRadius.circular(12),
         child: Padding(
@@ -39,15 +40,11 @@ class MarketDataCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildHeader(
-                currencyFormatter,
-                percentFormatter,
-                changeColor,
-              ),
+              _buildHeader(changeColor),
               const SizedBox(height: 12),
               const Divider(height: 1),
               const SizedBox(height: 12),
-              _buildMarketInfo(currencyFormatter),
+              _buildMarketInfo(),
             ],
           ),
         ),
@@ -55,11 +52,7 @@ class MarketDataCard extends StatelessWidget {
     );
   }
 
-  Widget _buildHeader(
-    NumberFormat currencyFormatter,
-    NumberFormat percentFormatter,
-    Color changeColor,
-  ) {
+  Widget _buildHeader(Color changeColor) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -76,7 +69,7 @@ class MarketDataCard extends StatelessWidget {
               ),
               const SizedBox(height: 4),
               Text(
-                currencyFormatter.format(marketData.price),
+                Formatters.currencyFormatter.format(marketData.price),
                 style: const TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.w600,
@@ -98,7 +91,7 @@ class MarketDataCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text(
-                '${percentFormatter.format(marketData.changePercent24h)}%',
+                '${Formatters.percentFormatter.format(marketData.changePercent24h)}%',
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
@@ -106,7 +99,7 @@ class MarketDataCard extends StatelessWidget {
                 ),
               ),
               Text(
-                currencyFormatter.format(marketData.change24h),
+                Formatters.currencyFormatter.format(marketData.change24h),
                 style: TextStyle(
                   fontSize: 12,
                   color: changeColor,
@@ -119,7 +112,7 @@ class MarketDataCard extends StatelessWidget {
     );
   }
 
-  Widget _buildMarketInfo(NumberFormat currencyFormatter) {
+  Widget _buildMarketInfo() {
     return Column(
       children: [
         Row(
@@ -127,11 +120,11 @@ class MarketDataCard extends StatelessWidget {
           children: [
             InfoItem(
               label: '24h High',
-              value: currencyFormatter.format(marketData.high24h),
+              value: Formatters.currencyFormatter.format(marketData.high24h),
             ),
             InfoItem(
               label: '24h Low',
-              value: currencyFormatter.format(marketData.low24h),
+              value: Formatters.currencyFormatter.format(marketData.low24h),
             ),
           ],
         ),
@@ -141,35 +134,15 @@ class MarketDataCard extends StatelessWidget {
           children: [
             InfoItem(
               label: 'Volume',
-              value: _formatVolume(marketData.volume),
+              value: formatLargeCurrency(marketData.volume),
             ),
             InfoItem(
               label: 'Market Cap',
-              value: _formatMarketCap(marketData.marketCap),
+              value: formatLargeCurrency(marketData.marketCap),
             ),
           ],
         ),
       ],
     );
-  }
-
-  String _formatVolume(double volume) {
-    if (volume >= 1e9) {
-      return '\$${(volume / 1e9).toStringAsFixed(2)}B';
-    } else if (volume >= 1e6) {
-      return '\$${(volume / 1e6).toStringAsFixed(2)}M';
-    } else {
-      return '\$${volume.toStringAsFixed(0)}';
-    }
-  }
-
-  String _formatMarketCap(double marketCap) {
-    if (marketCap >= 1e9) {
-      return '\$${(marketCap / 1e9).toStringAsFixed(2)}B';
-    } else if (marketCap >= 1e6) {
-      return '\$${(marketCap / 1e6).toStringAsFixed(2)}M';
-    } else {
-      return '\$${marketCap.toStringAsFixed(0)}';
-    }
   }
 }
